@@ -1,7 +1,7 @@
 const express=require('express');
 const app=express();
 
-const server=app.listen(3000,function(){
+const server=app.listen(3000 || process.env.PORT,function(){
   console.log("Server running >>>");
 });
 
@@ -15,7 +15,7 @@ app.get("/",function(req,res){
 var line_history=[];
 
 io.on("connection",function(socket){
-  
+
    for(var i in line_history){
      socket.emit("draw_line",{line: line_history[i]});
    }
