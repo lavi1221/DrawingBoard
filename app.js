@@ -1,3 +1,4 @@
+
 const express=require('express');
 const app=express();
 
@@ -10,7 +11,7 @@ const io =require("socket.io")(server);
 app.use(express.static("public"));
 
 app.get("/",function(req,res){
-  res.sendFile(__dirname+"/index.html");
+  res.sendFile("index.html");
 });
 var line_history=[];
 
