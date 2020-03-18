@@ -1,4 +1,4 @@
-
+require("dotenv").config();
 const express=require('express');
 const app=express();
 
@@ -9,6 +9,7 @@ const server=app.listen(3000 || process.env.PORT,function(){
 const io =require("socket.io")(server);
 
 app.use(express.static("public"));
+app.use(express.static("views"));
 
 app.get("/",function(req,res){
   res.sendFile("index.html");
