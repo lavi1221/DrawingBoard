@@ -2,7 +2,7 @@ require("dotenv").config();
 const express=require('express');
 const app=express();
 
-const server=app.listen(3000 || process.env.PORT,function(){
+const server=app.listen(process.env.PORT || 3000,function(){
   console.log("Server running >>>");
 });
 
