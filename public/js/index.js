@@ -1,4 +1,5 @@
 
+
    var socket  = io.connect();
    var mouse = {
       move:false,
@@ -10,16 +11,22 @@
    var context = canvas.getContext("2d");
    var width   = canvas.width;
    var height  = canvas.height;
+   context.strokeStyle='white';
+   context.shadowColor='blue';
+   context.shadowBlur=15;
 
-
+   context.fillStyle = 'black';
+   context.fillRect(0,0,canvas.width,canvas.height);
    context.lineJoin = 'round';
 
 
    var linewidth;
    var strokecolor;
+   var glow;
    document.getElementById("change").onclick = function() {
      linewidth = document.getElementById('size').value;
-     strokecolor= document.getElementById('color').value
+     strokecolor= document.getElementById('color').value;
+     glow=document.getElementById('glow').value;
    };
    canvas.addEventListener('mousedown',function(event){
      mouse.move = true;
@@ -35,7 +42,7 @@
       mouse.pos_prev.y=mouse.pos.y;
       mouse.pos.y=event.clientY-canvas.offsetTop;
 
-      socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ], width : linewidth , color:strokecolor  });
+      socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ], width : linewidth , color:strokecolor ,glow :glow });
     }
    });
 
@@ -50,11 +57,15 @@
      document.getElementById("bn").onclick = function() {
        var text=[];
        context.clearRect(0, 0, canvas.width, canvas.height);
+       context.fillStyle = 'black';
+       context.fillRect(0,0,canvas.width,canvas.height);
        socket.emit("clear",text);
       };
 
       socket.on("clear",function(cl){
-       context.clearRect(0, 0, canvas.width, canvas.height);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = 'black';
+        context.fillRect(0,0,canvas.width,canvas.height);
       });
 
 
@@ -62,6 +73,8 @@
         var line = data.line;
         context.lineWidth=data.width;
         context.strokeStyle=data.color;
+        context.shadowColor=data.glow;
+        context.shadowBlur=15;
         context.beginPath();
         context.moveTo(line[0].x , line[0].y);
         context.lineTo(line[1].x , line[1].y );
@@ -91,6 +104,6 @@
           mouse.pos_prev.y=mouse.pos.y;
           mouse.pos.y=event.touches[0].clientY-canvas.offsetTop;
 
-          socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ], width : linewidth , color:strokecolor  });
+          socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ], width : linewidth , color:strokecolor ,glow :glow});
           }
       });
