@@ -14,12 +14,14 @@ app.use(express.static("views"));
 app.get("/",function(req,res){
   res.sendFile("index.html");
 });
-var line_history=[];
 
+var line_history=[];
+var widtharr=[];
+var colorarr=[];
 io.on("connection",function(socket){
 
    for(var i in line_history){
-     socket.emit("draw_line",{line: line_history[i]});
+     socket.emit("draw_line",{line: line_history[i], width : widtharr[i], color:colorarr[i]});
    }
 
    socket.on("clear",function(text){
@@ -30,6 +32,8 @@ io.on("connection",function(socket){
 
    socket.on("draw_line",function(data){
      line_history.push(data.line);
-     io.emit("draw_line",{line:data.line});
+     widtharr.push(data.width);
+    colorarr.push(data.color);
+     io.emit("draw_line",{line:data.line , width : data.width, color : data.color});
    });
 });

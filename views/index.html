@@ -18,6 +18,24 @@
 
     <canvas id="draw"   height='580' width='880'></canvas>
     <button type="button" id="bn" class=" g btn btn-lg btn-danger" onclick="myFunction()" name="button">Clear</button>
+  <button type="button" id="change" onclick="mysize()" name="button" >
+    <select id='size' name="Size">
+     <option value="5">Size 5</option>
+     <option value="10">Size 10</option>
+     <option value="15">Size 15</option>
+    </select>
+
+    <select id='color' name="Color">
+      <option value="black" selected>black</option>
+      <option value="red">red</option>
+     <option value="green">green</option>
+     <option value="blue">blue</option>
+    </select>
+
+
+  </button>
+
+
 
     <script src="/socket.io/socket.io.js" ></script>
       <script src="/js/index.js" charset="utf-8"></script
