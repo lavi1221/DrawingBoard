@@ -5,16 +5,51 @@
   text-shadow: 5px 5px rgba(121,9,26,1);
   line-height: 40px;
 }
-
 #draw{
-  margin:10px auto;
-  margin-top:30px;
+  margin-top: 20px;
   display: block;
-  background-color: white;
-  padding: 0;
-  border:3px solid black;
+  padding-left: 10px;
+
+}
+.list-user{
+  padding-left:10px;
 }
 
-.g{
-  margin-left: 45%;
+#chatForm{
+  width:300px;
+}
+
+#messages{
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+  width:300px;
+  overflow: hidden scroll;
+  height: 500px;
+}
+#messages li{
+    width:300px;
+   padding: 5px 10px;
+}
+
+#messages li:nth-child(odd){
+   background: black;
+   color:white;
+}
+
+#online{
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+  height: 500px;
+}
+#online li{
+  font-family: sans-serif;
+  font-weight:bolder;
+  font-size: 30px;
+   padding: 5px 10px;
+}
+
+#online li:nth-child(odd){
+   background: #eef;
 }

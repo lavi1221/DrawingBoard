@@ -22,8 +22,16 @@ var line_history=[];
 var widtharr=[];
 var colorarr=[];
 var glowarr=[];
-io.on("connection",function(socket){
+var userarr=[];
 
+io.on("connection",function(socket){
+  socket.on('username',function(username){
+   socket.username = username;
+   userarr.push(username);
+   io.emit('is_online', socket.username );
+   io.emit('arrive',userarr);
+
+ });
    for(var i in line_history){
      socket.emit("draw_line",{line: line_history[i], width : widtharr[i], color:colorarr[i] , glow:glowarr[i]});
    }
@@ -41,4 +49,18 @@ io.on("connection",function(socket){
      glowarr.push(data.glow);
      io.emit("draw_line",{line:data.line , width : data.width, color : data.color,glow:data.glow});
    });
+
+  socket.on('disconnect', function(username) {
+    const index = userarr.indexOf(socket.username);
+     if (index > -1) {
+           userarr.splice(index, 1);
+      }
+        io.emit('is_gone', socket.username);
+        io.emit('arrive',userarr);
+
+    });
+
+    socket.on('chat_message', function(message) {
+          io.emit('chat_message', '<strong>' + socket.username + '</strong>: ' + message);
+      });
 });

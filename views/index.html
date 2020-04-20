@@ -10,15 +10,25 @@
    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <h1 class="h">Canvas Board</h1>
+<div class="row">
+  <div class="col-lg-2">
+    <div class="list-user">
+      <ul id="online">
 
-    <canvas id="draw"   height='580' width='880'></canvas>
-    <button type="button" id="bn" class=" g btn btn-lg btn-danger" onclick="myFunction()" name="button">Clear</button>
-  <button type="button" id="change" onclick="mysize()" name="button" >
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <canvas id="draw"   height='500' width='880'></canvas>
+  <center>
+    <button type="button" id="bn" class=" btn btn-lg btn-danger" onclick="myFunction()" name="button">Clear</button>
+   <button type="button" id="change" onclick="mysize()" name="button" >
     <select id='size' name="Size">
      <option value="5">Size 5</option>
      <option value="10">Size 10</option>
@@ -40,11 +50,28 @@
     </select>
 
   </button>
+  </center>
+
+  </div>
+  <div class="col-lg-3">
+    <div class="chat">
+      <ul id="messages">
+
+    </ul>
+    <form  id="chatForm">
+      <input class ='form-control text' id="txt" autocomplete="off" autofocus="on" placeholder="type your message here..." />
+      <button class ='btn btn-block btn-danger g'>Send</button>
+    </form>
+    </div>
+
+  </div>
+</div>
+
 
 
 
     <script src="/socket.io/socket.io.js" ></script>
-      <script src="/js/index.js" charset="utf-8"></script
+    <script src="/js/index.js" charset="utf-8"></script>
 
     </body>
 </html>
